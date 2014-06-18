@@ -1740,9 +1740,13 @@ body > .ui.grid {
 }
 
 .ui.menu .menu {
-  margin: 0em;
+  margin: -20em;
 }
 
+ui.menu.language.item{
+  margin: -12em 0rem;
+  color: #FF0000;
+}
 .ui.menu .item.left,
 .ui.menu .menu.left {
   float: left;
