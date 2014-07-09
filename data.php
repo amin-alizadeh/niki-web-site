@@ -24,6 +24,14 @@ switch ($_GET["d"]) {
 	case "social":
 		$info = getContent("social.inf");
 	break;
+	case "rightcolumn":
+		if (isset($_GET['page'])) {
+			$info = getContent($_GET['page'].'.inf');
+		}
+	break;
+	case "servicemenu":
+		$info = getContent("servicemenu.inf");
+	break;
 }
 
 echo json_encode($info);

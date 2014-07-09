@@ -57,14 +57,16 @@ img.bottom {vertical-align:text-bottom;}
             </div>
           </div>
 		  
+		  <a class="item" href="company.html">Company</a>
           <div class="ui dropdown link item">
-			<a class="item" href="company.html">Company</a>
             <a class="item" href="services.html">Services</a><i class="dropdown icon"></i>
-            <div class="menu">
-			  <a class="item" href="products/producta.html">Product A</a>
-              <a class="item" href="products/productb.html">Product B</a>
-			  <a class="item" href="products/productc.html">Product C</a>
-			  <a class="item" href="products/productd.html">Product D</a>
+            <div class="menu" id="servicemenu">
+				<div class="item"> <a href="products/producta.html">Product A</a> &nbsp;|&nbsp; <a href="products/productb.html">Product B</a>  <a href="products/productc.html">Product C</a> </div>
+				<div class="item"> <a href="products/productd.html">Product D</a> </div>
+				<div class="item"> <a href="products/producte.html">Product E</a> </div>
+				<div class="item"> <a href="products/productf.html">Product F</a> </div>
+				<div class="item"> <a href="products/productg.html">Product G</a> </div>
+				<div class="item"> <a href="products/producth.html">Product H</a> </div>
             </div>
           </div>
           <a class="item" href="news.html">News</a>
@@ -87,34 +89,29 @@ img.bottom {vertical-align:text-bottom;}
 	<div class="ui page grid stackable relaxed feature segment">
 		<div class="row">
 			<div class="column">
-				<h1 class="center aligned ui header">NIKI Marine Company Ky (NMC)</h1>
+				<h1 class="left aligned ui header">NIKI Marine Company Ky (NMC)</h1>
 			</div>
 		</div>
-	<div class="row">
-		<div class="fourteen wide column">
-			<p align="justify">
-				NIKI Marine Company Ky (NMC) is an internationally focused Marine service company based in Helsinki, Finland, that offers 
-				and develops the best quality of various services in the most efficient way in Ship repairs and marine services for ship owners 
-				and other customers. In addition, NMC works with a number of strategic partners to offer a range of various services and innovative 
-				technologies and solutions including marine Technical and commercial supports, Marine contract solutions, Vessel Broker and 
-				transportation of petrochemical cargos….  Pure Ballast ….. (Alfa Laval)…. in domestic and international markets. These services 
-				are suitable for a wide range of ships, ferries and other…… <br/>
-				Our team of marine professional  having a wide experience in ships machinery & equipment's repairing along with working 
-				relationships with some well-known yards and repair companies in region and  also supplying of Ships Machinery and 
-				related spare parts approved by classification societies. Well established in Scandinavia, Finland with Dubai branch office 
-				ensures our clients with great service and best advice. <br/>
-				NIKI Marine Company (NMC) sets the international standard services in its field. We also provide our valuable customers with latest, 
-				recently updated navigation and publication charts and local Notice to Mariners around the world. Our aim is to support and handover 
-				all critical, updated data to our clients for providing smooth operation for under hire or engaged charter vessels worldwide and 
-				especially in Middle East.<br/>
-				With 20 years of experience in marine filed, we have extensive network with different companies and mariners around the world. 
-				We serve as marine technical advisor, expert Marine Consultant for investors in marine sectors and other related fields in Marine industry. <br/>
-				Our client's interests always come first. Our success depends crucially on our ability to serve our valuable customers in the most efficient way. 
-				This company with hard working during 24 h 7 ensures right qualitative services to the Ship Owners.
-			<div class="ui inverted section divider"></div>
+		<div class="row">
+			<div class="eleven wide column">
+				<p align="justify">
+					Our client's interests always come first. Our success depends crucially on our ability to serve our valuable customers in the most efficient way. This company with hard working during 24 h 7 ensures right qualitative services to the Ship Owners.
+				</p>
+				<div class="ui inverted section divider"></div>
+			</div>
+			<div class="five wide right floated column">
+				<div class="ui secondary form segment">
+					<div class="ui ribbon label"  id="rightcolumnheader">Dogs</div>
+					<small>
+					<p align="justify" id="rightcolumn">
+						
+					</p>
+					</small>
+				</div>
+			</div>
+			
 		</div>
 	</div>
-	
 
 	<div class="ui inverted black page grid segment">
 		<div class="ten wide column">
@@ -189,7 +186,6 @@ img.bottom {vertical-align:text-bottom;}
 		json = httpGet("data.php?d=social");
 		if (json != null) {
 			var parsed = JSON.parse(json);
-			if ('facebook' in parsed)
 			for (var key in parsed) {
 				text += '<a href="' + parsed[key] + '" target="_blank">' +
 						'<i class="big inverted circular ' + key + ' icon"></i></a>';
@@ -208,7 +204,57 @@ img.bottom {vertical-align:text-bottom;}
 		}
 		document.getElementById("social").innerHTML = text;
 	}
+	function fillRight() {
+		var loc = window.location.pathname;
+		var parts = loc.split("/");
+		var page = parts[parts.length - 1];
+		if (page.split(".").length > 1) {
+			page = page.split(".")[0];
+		}
+		var json = httpGet("data.php?d=rightcolumn&page="+page);
+		var text = '</br>NIKI Marine Company <a href="."> Read more.. </a><br/>Contact details <a href="contact.html"> Read more.. </a><br/>';
+		var header = 'Content';
+		if (json != null) {
+			var parsed = JSON.parse(json);
+			if ('header' in parsed) {
+				 header = parsed.header;
+			} 
+			text = '<br/>';
+			for (var link in parsed) {
+				if (link != 'header') {
+					text += parsed[link] + sp + '<a href="' + link + '" target=_blank> more.. </a><br/>';
+				}
+			}
+		} 
+		document.getElementById("rightcolumnheader").innerHTML = header;
+		document.getElementById("rightcolumn").innerHTML = text;
+	}
+	function fillServiceMenu() {
+		var json = httpGet("data.php?d=servicemenu");
+		if (json == null) {
+			json = '{"navpubcharts.html":"NAVIGATION AND PUBLICATION CHARTS","surveyreport.html":"SURVEY & REPORT","shiprepdock.html":"SHIP REPAIR AND DRY DOCKING SERVICES","logtech.html":"LOGISTIC AND TECHNICAL SUPPORT","lpgtanker.html":"LPG & TANKER BROKER","consultinvest.html":"CONSULTANCY AND INVESTMENTS","petrotrans.html":"PETROCHEMICAL PRODUCT & TRANSPORTATION SERVICES","manage.html":"MANNING AGENCY","envsols.html":"ENVIRONMENT SOLUTIONS"}';
+		}
+		var parsed = JSON.parse(json);
+		var menus = '<div class="item">';
+		var iteminrow = 2;
+		var count = 0;
+		for (var link in parsed) {
+			//if (count % 2 == 0) {
+			//	menus += '<div class="item">' + '<a href="' + link + '">' + parsed[link] + '</a>';
+			//} else {
+			//	menus += '<a href="' + link + '">' + parsed[link] + '</a>' + '</div>';
+			//}
+			//count++;
+			menus += '<a href="' + link + '">' + parsed[link] + '</a>' + sp + '|' + sp;
+		}
+		menus += '</div>';
+		document.getElementById("servicemenu").innerHTML = menus;
+	}
 	fillContact();
 	fillSocial();
+	fillRight();
+	fillServiceMenu();
+	//servicemenu = document.getElementById("servicemenu");
+	//servicemenu.transition('shake');
 </script>
 </html>
