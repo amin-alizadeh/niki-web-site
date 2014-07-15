@@ -3,7 +3,8 @@ var serviceMenuStatus = false;
 var invokedServiceMenu;
 var serviceMenuContent = '<a class="item" href="company.html" onmouseover="ShowServiceMenu(true)" onmouseout="ShowServiceMenu(false)">Company2</a>' +
 '<a class="item" href="contact.html" onmouseover="ShowServiceMenu(true)" onmouseout="ShowServiceMenu(false)">Contact</a>';
-
+var serviceMenuContentDefault = '';
+var serviceMenuCount = 0;
 function httpGet(theUrl)
 {
 	var xmlHttp = null;
@@ -85,39 +86,44 @@ function getServiceMenu() {
 	var parsed = JSON.parse(json);
 	var menus = '';
 	var iteminrow = 2;
-	var count = 0;
+	
 	for (var link in parsed) {
+		serviceMenuCount++;
 		menus += '<a class="item" href="' + link + '" onmouseover="KeepServiceMenu(true)" onmouseout="KeepServiceMenu(false)">' + parsed[link] + '</a>';
+		console.log(parsed[link].length);
+		var empty = '';
+		for (var i = 0; i < parsed[link].length; i++)
+			empty += 'A';
+		serviceMenuContentDefault += '<div class="hidden item">' + parsed[link] + '</div>';
 	}
 	serviceMenuContent = menus;
 }
+
 function ShowServiceMenu(show) {
 	var t = '';
 	if (show) {
-		console.log ('mouse entered up');
 		clearTimeout (invokedServiceMenu);
 		t = serviceMenuContent;
 		document.getElementById("servicemenu").innerHTML = t;
 		serviceMenuStatus = true;
 	} else {
 		invokedServiceMenu = setTimeout(HideServiceMenu, 500);
-		console.log ('mouse left up');
 	}
 }
 
 function HideServiceMenu () {
 	serviceMenuStatus = false;
-	document.getElementById("servicemenu").innerHTML = '<div class="item">&nbsp;</div>';
+	document.getElementById("servicemenu").innerHTML = serviceMenuContentDefault;//'<div class="item"><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></div>';
 }
 
 function KeepServiceMenu(show) {
-	console.log ('mouse entered down ' + (show && serviceMenuStatus));
 	ShowServiceMenu (show && serviceMenuStatus);
 }
 fillContact();
 fillSocial();
 fillRight();
 getServiceMenu();
+HideServiceMenu();
 //fillServiceMenu();
 //secondaryServiceMenu();
 //servicemenu = document.getElementById("servicemenu");

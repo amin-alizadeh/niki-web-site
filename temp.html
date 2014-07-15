@@ -16,6 +16,8 @@
 
 	<link rel="stylesheet" type="text/css" href="packaged/css/semantic.css">
 	<link rel="stylesheet" type="text/css" href="homepage.css">
+    <link href="ddmenu/ddmenu.css" rel="stylesheet" type="text/css" />
+    <script src="ddmenu/ddmenu.js" type="text/javascript"></script>
 
 	<script src="jquery.js"></script>
 	<script src="packaged/javascript/semantic.js"></script>
@@ -27,9 +29,8 @@ img.bottom {vertical-align:text-bottom;}
 </style> -->
 </head>
 <body id="home">
-  <div class="ui inverted page grid masthead segment">
-   
-    <div class="column">
+	<div class="ui inverted page grid masthead segment">
+		<div class="column">
 	    <div class="inverted secondary language ui menu">
 			<div class="right menu">
 					<a class="small ui basic inverted animated button button">
@@ -58,23 +59,11 @@ img.bottom {vertical-align:text-bottom;}
 			</div>
 		  
 		  <a class="item" href="company.html">Company</a>
-		  <a class="item" href="services.html" onmouseover="ShowServiceMenu(true)" onmouseout="ShowServiceMenu(false)">Services <i class="dropdown icon"></i></a>
-          <!--<div class="ui simple dropdown item">
-            <a class="item" href="services.html">Services</a><i class="dropdown icon"></i>
-            <div class="left pointing menu" id="servicemenu">
-				<div class="item"> <a href="products/producta.html">Product A</a> </div>
-				<div class="item"> <a href="products/productb.html">Product B</a> </div>
-				<div class="item"> <a href="products/productc.html">Product C</a> </div>
-				<div class="item"> <a href="products/productd.html">Product D</a> </div>
-				<div class="item"> <a href="products/producte.html">Product E</a> </div>
-				<div class="item"> <a href="products/productf.html">Product F</a> </div>
-				<div class="item"> <a href="products/productg.html">Product G</a> </div>
-				<div class="item"> <a href="products/producth.html">Product H</a> </div>
-            </div>
-          </div> -->
+		  <a class="item" href="services.html" onmouseover="ShowServiceMenu(true)" onmouseout="ShowServiceMenu(false)">Services</a>
           <a class="item" href="news.html">News</a>
           <a class="item" href="career.html">Career</a>
           <a class="item" href="contact.html">Contact</a>          
+		  
         </div>
 		<div class="inverted secondary pointing ui menu" id="servicemenu" onmouseover="KeepServiceMenu(true)" onmouseout="KeepServiceMenu(false)">
 			<div class="item">&nbsp;</div>
