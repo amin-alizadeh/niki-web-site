@@ -3,6 +3,7 @@ var serviceMenuStatus = false;
 var invokedServiceMenu;
 var serviceMenuContent = '<a class="item" href="company.html" onmouseover="ShowServiceMenu(true)" onmouseout="ShowServiceMenu(false)">Company2</a>' +
 '<a class="item" href="contact.html" onmouseover="ShowServiceMenu(true)" onmouseout="ShowServiceMenu(false)">Contact</a>';
+var defaultServiceMenu = '{"navpubcharts.html":"Navigation And Publication Charts","surveyreport.html":"Survey & Report","shiprepdock.html":"Ship Repair And Dry Docking Services","logtech.html":"Logistic And Techincal Support","lpgtanker.html":"LPG & Tanker Broker","consultinvest.html":"Consultancy And Investments","petrotrans.html":"Petrochemical Products & Transportation Services","manage.html":"Manning Agency","envsols.html":"Envromental Solutions"}';
 var serviceMenuContentDefault = '';
 var serviceMenuCount = 0;
 var defaultContacts = '<i class="mail icon"></i>&nbsp;info &nbsp;[ät] &nbsp;nikimarine.com<p><i class="phone sign icon"></i>+358 (0)9 987654321</p>';
@@ -17,7 +18,7 @@ var defaultSocial = '<div class="ui header">Social Media</div>' +
 				'<i class="big inverted circular youtube icon"></i> ' +
 				'</a>';
 
-
+var defaultRight = '{"header":"Related",".":"NIKI Marine Company","contact.html":"Contact details"}';
 function httpGet(theUrl)
 {
 	var xmlHttp = null;
@@ -36,26 +37,26 @@ function httpGet(theUrl)
 function fillContact() { 
 	var text = '<i class="mail icon"></i>';
 	json = httpGet("data.php?d=contact");
-	if (json != null) {
+	try {
 		var parsed = JSON.parse(json);
-		text += sp + parsed.email + sp + "[ät]" + sp + parsed.site;
-		text += '<p><i class="phone sign icon"></i>' + parsed.phonesuffix + sp + parsed.phone;
-	} else {
-		text = defaultContacts;
+	} catch (e) {
+		parsed = JSON.parse(defaultContacts);
 	}
+	text += sp + parsed.email + sp + "[ät]" + sp + parsed.site;
+	text += '<p><i class="phone sign icon"></i>' + parsed.phonesuffix + sp + parsed.phone;
 	document.getElementById("contact").innerHTML = text;
 }
 function fillSocial() {
 	var text = '<div class="ui header">Social Media</div>';
 	json = httpGet("data.php?d=social");
-	if (json != null) {
+	try {
 		var parsed = JSON.parse(json);
-		for (var key in parsed) {
-			text += '<a href="' + parsed[key] + '" target="_blank">' +
-					'<i class="big inverted circular ' + key + ' icon"></i></a>';
-		}
-	} else {
-		text = defaultSocial;
+	} catch (e) {
+		parsed = JSON.parse(defaultSocial);
+	}
+	for (var key in parsed) {
+		text += '<a href="' + parsed[key] + '" target="_blank">' +
+				'<i class="big inverted circular ' + key + ' icon"></i></a>';
 	}
 	document.getElementById("social").innerHTML = text;
 }
@@ -66,22 +67,23 @@ function fillRight() {
 	if (page.split(".").length > 1) {
 		page = page.split(".")[0];
 	}
-	
-	var text = '</br>NIKI Marine Company <a href="."> Read more.. </a><br/>Contact details <a href="contact.html"> Read more.. </a><br/>';
-	var header = 'Content';
 	var json = httpGet("data.php?d=rightcolumn&page="+page);
-	if (json != null) {
+	try {
 		var parsed = JSON.parse(json);
-		if ('header' in parsed) {
-			 header = parsed.header;
-		} 
-		text = '<br/>';
-		for (var link in parsed) {
-			if (link != 'header') {
-				text += parsed[link] + sp + '<a href="' + link + '" target=_blank> more.. </a><br/>';
-			}
-		}
+	} catch (e) {
+		parsed = JSON.parse(defaultRight);
+	}
+	var parsed = JSON.parse(json);
+	if ('header' in parsed) {
+		 header = parsed.header;
 	} 
+	text = '<br/>';
+	for (var link in parsed) {
+		if (link != 'header') {
+			text += parsed[link] + sp + '<a href="' + link + '" target=_blank> more.. </a><br/>';
+		}
+	}
+
 	document.getElementById("rightcolumnheader").innerHTML = header;
 	document.getElementById("rightcolumn").innerHTML = text;
 }
@@ -90,10 +92,13 @@ function getServiceMenu() {
 	if (json == null) {
 		json = '{"navpubcharts.html":"Navigation And Publication Charts","surveyreport.html":"Survey & Report","shiprepdock.html":"Ship Repair And Dry Docking Services","logtech.html":"Logistic And Techincal Support","lpgtanker.html":"LPG & Tanker Broker","consultinvest.html":"Consultancy And Investments","petrotrans.html":"Petrochemical Products & Transportation Services","manage.html":"Manning Agency","envsols.html":"Envromental Solutions"}';
 	}
-	var parsed = JSON.parse(json);
+	try {
+		var parsed = JSON.parse(json);
+	} catch (e) {
+		parsed = JSON.parse(defaultServiceMenu);
+	}
 	var menus = '';
-	var iteminrow = 2;
-	
+
 	for (var link in parsed) {
 		serviceMenuCount++;
 		menus += '<a class="item" href="' + link + '" onmouseover="KeepServiceMenu(true)" onmouseout="KeepServiceMenu(false)">' + parsed[link] + '</a>';
