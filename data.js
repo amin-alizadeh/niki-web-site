@@ -64,7 +64,6 @@ function fillRight() {
 	} catch (e) {
 		parsed = JSON.parse(defaultRight);
 	}
-	var parsed = JSON.parse(json);
 	if ('header' in parsed) {
 		 header = parsed.header;
 	} 
