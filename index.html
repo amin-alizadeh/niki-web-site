@@ -27,8 +27,8 @@ img.bottom {vertical-align:text-bottom;}
 </style> -->
 </head>
 <body id="home">
-  <div class="ui inverted page grid masthead segment">   
-    <div class="column">
+	<div class="ui inverted page grid masthead segment">
+		<div class="column">
 	    <div class="inverted secondary language ui menu">
 			<div class="right menu">
 					<a class="small ui basic inverted animated button button">
@@ -41,39 +41,31 @@ img.bottom {vertical-align:text-bottom;}
 					</a>
 			</div>
 		</div>
+		
       <div class="inverted secondary pointing ui menu">
         <div class="header item"><a href=".">Niki Marine Company</a></div>
         <div class="right menu">
-          <div class="ui top right pointing mobile dropdown link item">
-		    <i class="list layout icon"></i>
-			<div class="menu">
-			  <a class="item" href="company.html">Company</a>
-              <a class="item" href="services.html">Services</a>
-			  <a class="item" href="news.html">News</a>
-			  <a class="item" href="career.html">Career</a>			  
-			  <a class="item" href="contact.html">Contact</a>
-            </div>
-          </div>
+			<div class="ui top right pointing mobile dropdown link item">
+				<i class="list layout icon"></i>
+				<div class="menu">
+						<a class="item" href="company.html">Company</a>
+						<a class="item" href="services.html">Services</a>
+						<a class="item" href="news.html">News</a>
+						<a class="item" href="career.html">Career</a>			  
+						<a class="item" href="contact.html">Contact</a>
+				</div>
+			</div>
 		  
 		  <a class="item" href="company.html">Company</a>
-          <div class="ui dropdown link item">
-			
-            <a class="item" href="services.html">Services</a><i class="dropdown icon"></i>
-            <div class="menu">
-			  <a class="item" href="#">Product A</a>
-              <a class="item" href="#">Product B</a>
-			  <a class="item" href="#">Product C</a>
-			  <a class="item" href="#">Product D</a>
-			  <a class="item" href="#">Product E</a>
-			  <a class="item" href="#">Product F</a>
-			  <a class="item" href="#">Product G</a>
-			  <a class="item" href="#">Product H</a>
-            </div>
-          </div>
+		  <a class="item" href="services.html" onmouseover="ShowServiceMenu(true)" onmouseout="ShowServiceMenu(false)">Services</a>
           <a class="item" href="news.html">News</a>
           <a class="item" href="career.html">Career</a>
           <a class="item" href="contact.html">Contact</a>          
+		  
         </div>
+		<div class="inverted secondary pointing ui menu" id="servicemenu" onmouseover="KeepServiceMenu(true)" onmouseout="KeepServiceMenu(false)">
+			<div class="item">&nbsp;</div>
+		</div>
       </div>
  
 	<div class="ui hidden transition information">
@@ -90,12 +82,12 @@ img.bottom {vertical-align:text-bottom;}
 	<div class="ui page grid stackable relaxed feature segment">
 		<div class="row">
 			<div class="column">
-				<h1 class="center aligned ui header">NIKI Marine Company Ky (NMC)</h1>
+				<h1 class="left aligned ui header">NIKI Marine Company Ky (NMC)</h1>
 			</div>
 		</div>
-	<div class="row">
-		<div class="fourteen wide column">
-			<p align="justify">
+		<div class="row">
+			<div class="eleven wide column">
+				<p align="justify">
 				NIKI Marine Company Ky (NMC) is an internationally focused Marine service company based in Helsinki, Finland, that offers 
 				and develops the best quality of various services in the most efficient way in Ship repairs and marine services for ship owners 
 				and other customers. In addition, NMC works with a number of strategic partners to offer a range of various services and innovative 
@@ -114,10 +106,22 @@ img.bottom {vertical-align:text-bottom;}
 				We serve as marine technical advisor, expert Marine Consultant for investors in marine sectors and other related fields in Marine industry. <br/>
 				Our client's interests always come first. Our success depends crucially on our ability to serve our valuable customers in the most efficient way. 
 				This company with hard working during 24 h 7 ensures right qualitative services to the Ship Owners.
-			<div class="ui inverted section divider"></div>
+			<div class="ui inverted section divider"></div>				</p>
+				<div class="ui inverted section divider"></div>
+			</div>
+			<div class="five wide right floated column">
+				<div class="ui secondary form segment">
+					<div class="ui ribbon label"  id="rightcolumnheader">Recent</div>
+					<small>
+					<p align="justify" id="rightcolumn">
+						
+					</p>
+					</small>
+				</div>
+			</div>
+			
 		</div>
 	</div>
-	
 
 	<div class="ui inverted black page grid segment">
 		<div class="ten wide column">
@@ -160,58 +164,5 @@ img.bottom {vertical-align:text-bottom;}
 		</div>
 	</div>
 </body>
-<script>
-	var sp = "&nbsp;";
-	function httpGet(theUrl)
-	{
-		var xmlHttp = null;
-
-		xmlHttp = new XMLHttpRequest();
-		xmlHttp.open( "GET", theUrl, false );
-		xmlHttp.send( null );
-		if (xmlHttp.status == 200) {
-			return xmlHttp.responseText;
-		} else {
-			return null;
-		}
-	}
-	function fillContact() { 
-		var text = '<i class="mail icon"></i>';
-		json = httpGet("data.php?d=contact");
-		if (json != null) {
-			var parsed = JSON.parse(json);
-			text += sp + parsed.email + sp + "[ät]" + sp + parsed.site;
-			text += '<p><i class="phone sign icon"></i>' + parsed.phonesuffix + sp + parsed.phone;
-		} else {
-			text = '<i class="mail icon"></i>&nbsp;info &nbsp;[ät] &nbsp;nikimarine.com<p><i class="phone sign icon"></i>+358 (0)9 987654321</p>';
-		}
-		document.getElementById("contact").innerHTML = text;
-	}
-	function fillSocial() {
-		var text = '<div class="ui header">Social Media</div>';
-		json = httpGet("data.php?d=social");
-		if (json != null) {
-			var parsed = JSON.parse(json);
-			if ('facebook' in parsed)
-			for (var key in parsed) {
-				text += '<a href="' + parsed[key] + '" target="_blank">' +
-						'<i class="big inverted circular ' + key + ' icon"></i></a>';
-			}
-		} else {
-			text = '<div class="ui header">Social Media</div>' +
-					'<a href="https://www.facebook.com/nmc-fi" target="_blank">' +
-					'<i class="big inverted circular facebook icon"></i> ' +
-					'</a>' +
-					'<a href="https://www.linkedin.com/company/nmc-fi" target="_blank">' +
-					'<i class="big inverted circular linkedin icon"></i> ' +
-					'</a>' +
-					'<a href="https://www.youtube.com/nmc-fi" target="_blank">' +
-					'<i class="big inverted circular youtube icon"></i> ' +
-					'</a>';
-		}
-		document.getElementById("social").innerHTML = text;
-	}
-	fillContact();
-	fillSocial();
-</script>
+<script src="data.js"></script>
 </html>

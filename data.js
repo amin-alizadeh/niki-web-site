@@ -121,10 +121,10 @@ function HideServiceMenu () {
 function KeepServiceMenu(show) {
 	ShowServiceMenu (show && serviceMenuStatus);
 }
+getServiceMenu();
 fillContact();
 fillSocial();
 fillRight();
-getServiceMenu();
 HideServiceMenu();
 //fillServiceMenu();
 //secondaryServiceMenu();
