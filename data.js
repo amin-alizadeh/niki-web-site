@@ -6,17 +6,8 @@ var serviceMenuContent = '<a class="item" href="company.html" onmouseover="ShowS
 var defaultServiceMenu = '{"navpubcharts.html":"Navigation And Publication Charts","surveyreport.html":"Survey & Report","shiprepdock.html":"Ship Repair And Dry Docking Services","logtech.html":"Logistic And Techincal Support","lpgtanker.html":"LPG & Tanker Broker","consultinvest.html":"Consultancy And Investments","petrotrans.html":"Petrochemical Products & Transportation Services","manage.html":"Manning Agency","envsols.html":"Envromental Solutions"}';
 var serviceMenuContentDefault = '';
 var serviceMenuCount = 0;
-var defaultContacts = '<i class="mail icon"></i>&nbsp;info &nbsp;[ät] &nbsp;nikimarine.com<p><i class="phone sign icon"></i>+358 (0)9 987654321</p>';
-var defaultSocial = '<div class="ui header">Social Media</div>' +
-				'<a href="https://www.facebook.com/nmc-fi" target="_blank">' +
-				'<i class="big inverted circular facebook icon"></i> ' +
-				'</a>' +
-				'<a href="https://www.linkedin.com/company/nmc-fi" target="_blank">' +
-				'<i class="big inverted circular linkedin icon"></i> ' +
-				'</a>' +
-				'<a href="https://www.youtube.com/nmc-fi" target="_blank">' +
-				'<i class="big inverted circular youtube icon"></i> ' +
-				'</a>';
+var defaultContacts = '{"site":"nikimarine.eu","email":"info","phone":"9 987654321","phonesuffix":"+358"}';
+var defaultSocial = '{"facebook":"https:\/\/www.facebook.com\/nmc-fi","youtube":"https:\/\/www.youtube.com\/nmc-fi","linkedin":"https:\/\/www.linkedin.com\/company\/nmc-fi"}';
 
 var defaultRight = '{"header":"Related",".":"NIKI Marine Company","contact.html":"Contact details"}';
 function httpGet(theUrl)
