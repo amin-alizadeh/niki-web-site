@@ -25,8 +25,10 @@ function httpGet(theUrl)
 	xmlHttp = new XMLHttpRequest();
 	xmlHttp.open( "GET", theUrl, false );
 	xmlHttp.send( null );
+	var ret = xmlHttp.responseText;
+	console.log('Response for URL ' + theUrl + ' is ' ret);
 	if (xmlHttp.status == 200) {
-		return xmlHttp.responseText;
+		return ret;
 	} else {
 		return null;
 	}
