@@ -18,7 +18,7 @@ function httpGet(theUrl)
 	xmlHttp.open( "GET", theUrl, false );
 	xmlHttp.send( null );
 	var ret = xmlHttp.responseText;
-	console.log('Response for URL ' + theUrl + ' is ' + ret);
+	//console.log('Response for URL ' + theUrl + ' is ' + ret);
 	if (xmlHttp.status == 200) {
 		return ret;
 	} else {
@@ -34,7 +34,8 @@ function fillContact() {
 		parsed = JSON.parse(defaultContacts);
 	}
 	text += sp + parsed.email + sp + "[ät]" + sp + parsed.site;
-	text += '<p><i class="phone sign icon"></i>' + parsed.phonesuffix + sp + parsed.phone;
+	text += '<p><i class="phone sign icon"></i>' + parsed.phonesuffix + sp + parsed.phone1;
+	text += '<p><i class="phone sign icon"></i>' + parsed.phonesuffix + sp + parsed.phone2;
 	document.getElementById("contact").innerHTML = text;
 }
 function fillSocial() {
@@ -58,6 +59,7 @@ function fillRight() {
 	if (page.split(".").length > 1) {
 		page = page.split(".")[0];
 	}
+	
 	var json = httpGet("data.php?d=rightcolumn&page="+page);
 	try {
 		var parsed = JSON.parse(json);
@@ -70,7 +72,7 @@ function fillRight() {
 	text = '<br/>';
 	for (var link in parsed) {
 		if (link != 'header') {
-			text += parsed[link] + sp + '<a href="' + link + '" target=_blank> more.. </a><br/>';
+			text += parsed[link] + sp + '<a href="' + link + '" target=_blank> more.. </a><br/><br/>';
 		}
 	}
 
@@ -92,7 +94,7 @@ function getServiceMenu() {
 	for (var link in parsed) {
 		serviceMenuCount++;
 		menus += '<a class="item" href="' + link + '" onmouseover="KeepServiceMenu(true)" onmouseout="KeepServiceMenu(false)">' + parsed[link] + '</a>';
-		console.log(parsed[link].length);
+		//console.log(parsed[link].length);
 		var empty = '';
 		for (var i = 0; i < parsed[link].length; i++)
 			empty += 'A';
@@ -121,11 +123,35 @@ function HideServiceMenu () {
 function KeepServiceMenu(show) {
 	ShowServiceMenu (show && serviceMenuStatus);
 }
+
+function fillServiceMenu() {
+	var json = httpGet("data.php?d=servicemenu");
+	if (json == null) {
+		json = '{"charts-publications.html":"Chart & Publication","survey-report.html":"Survey & Report","drydocking-services.html":"Dry Docking Services","lpg-tanker.html":"LPG & Tanker","consultancy.html":"Consultancy","manning-agency.html":"Manning Agency","environmental.html":"Environmental"}';
+	}
+	try {
+		var parsed = JSON.parse(json);
+	} catch (e) {
+		parsed = JSON.parse(defaultServiceMenu);
+	}
+	var menus = '';
+
+	for (var link in parsed) {
+		serviceMenuCount++;
+		menus += '<a class="item" href="' + link + '">' + parsed[link] + '</a>'
+		//menus += '<a class="item" href="' + link + '" onmouseover="KeepServiceMenu(true)" onmouseout="KeepServiceMenu(false)">' + parsed[link] + '</a>';
+		//console.log(parsed[link].length);
+	}
+	document.getElementById("servicemenu").innerHTML = menus;
+}
+
 getServiceMenu();
 fillContact();
 fillSocial();
 fillRight();
 HideServiceMenu();
+fillServiceMenu();
+
 //fillServiceMenu();
 //secondaryServiceMenu();
 //servicemenu = document.getElementById("servicemenu");

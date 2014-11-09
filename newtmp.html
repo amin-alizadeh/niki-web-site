@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+	<title>Niki Marine Company</title>
+
+	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" type="text/css" href="css/semantic.css">
+	<link rel="stylesheet" type="text/css" href="css/pages.css">
+	
+
+	<script src="js/jquery2.0.3.js"></script>
+	<script src="js/semantic.js"></script>
+	<script src="js/homepage.js"></script>
+</head>
+
+<body id="home">
+
+<div id="page">
+	<div class="row">
+		<div class="inverted secondary pointing ui menu">
+			<div class="header item">Delicode Analytics</div>
+			<div class="right menu">
+				<div class="item" id="LoggedUsername">User: </div>
+				<a class="item" href="../server/logout.php?admin"><i class="sign out icon"></i> Sign out</a>
+			</div>
+		</div>
+	</div>
+
+
+<div class="ui grid">
+	<div class="three wide column">
+
+		<div class="ui blue small inverted vertical menu">
+			<a class="active item" href="index.html">
+				<i class="home icon"></i> Home
+			</a>			
+			<a class="item" href="users.html">
+				<i class="users icon"></i> Users
+			</a>
+			<a class="item" href="campaigns.html">
+				<i class="flag icon"></i> Campaigns
+			</a>
+			<a class="item" href="locations.html">
+				<i class="map marker icon"></i> Locations
+			</a>
+			<a class="item" href="sensors.html">
+				<i class="unhide icon"></i> Sensors
+			</a>
+			<a class="item" href="verifications.html">
+				<i class="qr code icon"></i> Verifications
+			</a>
+			<a class="item" href="../server/logout.php?admin">
+				<i class="sign out icon"></i> Sign out
+			</a>
+		</div>
+  	</div>
+	<div class="ten wide column">
+
+		<div class="ui inverted list">
+			<div class="item">
+				<i class="users icon"></i>
+				<div class="content">
+					<a class="header" href="users.html">Users</a>
+					<div class="description">
+						Adding/removing users, changing passwords, and assiging campaigns to them.<p>
+					</div>
+				</div>				
+			</div>
+			<div class="item">
+				<i class="flag icon"></i>
+				<div class="content">
+					<a class="header" href="campaigns.html">Campaigns</a>
+					<div class="description">
+						Adding/removing campaigns, editting them, and assiging sensors to them.<p>
+					</div>
+				</div>				
+			</div>
+			<div class="item">
+				<i class="map marker icon"></i>
+				<div class="content">
+					<a class="header" href="locations.html">Locations</a>
+					<div class="description">
+						Adding/removing Locations and editting them.<p>
+					</div>
+				</div>				
+			</div>
+			<div class="item">
+				<i class="unhide icon"></i>
+				<div class="content">
+					<a class="header" href="sensors.html">Sensors</a>
+					<div class="description">
+						Adding/removing sensors, editting them, and assiging them to campaigns.<p>
+					</div>
+				</div>				
+			</div>
+			<div class="item">
+				<i class="qr code icon"></i>
+				<div class="content">
+					<a class="header" href="verifications.html">Verifications</a>
+					<div class="description">
+						Adding/removing verifications for non-users to install sensors.<p>
+					</div>
+				</div>				
+			</div>
+		</div>
+
+	</div>
+  
+</div>
+
+<div class="ui small modal">
+	<i class="close icon"></i>
+	<div class="header" id="modalHeader">
+
+	</div>
+	<div class="content" id="modalContent">
+	      
+	</div>
+	<div class="actions" id="modalAction">
+
+	</div>
+</div>
+
+
+
+	<div class="ui page dimmer">
+	  <div class="content">
+	    <div class="center">
+	    	<div class="ui text loader" id="pageDimmerContent">Loading</div>
+	    </div>
+	  </div>
+	</div>
+
+</div>
+
+<div class="ui popup"></div>
+
+</body>
+
+<script>function initialize() {return;}</script>
+
+</html>

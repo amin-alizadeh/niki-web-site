@@ -1,9 +1,8 @@
-navpubcharts.html=Navigation And Publication Charts
-surveyreport.html=Survey & Report
-shiprepdock.html= Ship Repair And Dry Docking Services
-logtech.html= Logistic And Techincal Support
-lpgtanker.html= LPG & Tanker Broker
-consultinvest.html= Consultancy And Investments
-petrotrans.html= Petrochemical Products & Transportation Services
-manage.html= Manning Agency
-envsols.html= Envromental Solutions
+charts-publications.html=Chart & Publication
+survey-report.html=Survey & Report
+drydocking-services.html=Dry Docking Services
+lpg-tanker.html=LPG & Tanker
+consultancy.html=Consultancy
+transportation.html=Transportation
+manning-agency.html=Manning Agency
+environmental.html=Environmental 

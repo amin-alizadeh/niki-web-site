@@ -1,6 +1,10 @@
 <?php
 function getContent ($file) {
 	$info = array();
+	if ($file == ".inf") {
+		$file = "index.inf";
+	}
+		
 	$dfile = fopen($file, "r") or die("Unable to open file!");
 	while(!feof($dfile)) {
 		$line = trim(fgets($dfile));
